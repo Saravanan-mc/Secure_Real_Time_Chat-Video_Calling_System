@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chat Space ❤️ - Premium Private Chat</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
+</head>
+<body>
+    <div class="background-effects">
+        <div class="blob blob-1"></div>
+        <div class="blob blob-2"></div>
+    </div>
+
+    <div class="container">
+        <header class="header">
+            <button id="themeToggle" class="theme-toggle-btn" title="Toggle Theme">
+                <i class="fa-solid fa-moon"></i>
+            </button>
+            <h1><i class="fa-solid fa-heart-pulse icon-glow"></i> Chat Space</h1>
+            <p>Secure, private, and beautiful real-time communication.</p>
+        </header>
+
+        <div class="glass-panel main-panel">
+            <div class="tabs">
+                <button class="tab-btn active" onclick="switchTab('join')">Join Room</button>
+                <button class="tab-btn" onclick="switchTab('create')">Create Room</button>
+            </div>
+
+            <!-- JOIN ROOM FORM -->
+            <form id="joinForm" class="form-section active">
+                <div class="input-group">
+                    <i class="fa-solid fa-hashtag input-icon"></i>
+                    <input type="text" id="joinRoomId" placeholder="Room ID" required autocomplete="off">
+                </div>
+                <div class="input-group">
+                    <i class="fa-solid fa-lock input-icon"></i>
+                    <input type="password" id="joinPassword" placeholder="Room Password" required>
+                </div>
+                <div class="input-group">
+                    <i class="fa-solid fa-user input-icon"></i>
+                    <input type="text" id="joinUsername" placeholder="Your Name" required maxlength="20" autocomplete="off">
+                </div>
+                <button type="submit" class="btn primary-btn btn-animate">Join Space <i class="fa-solid fa-arrow-right"></i></button>
+                <div id="joinError" class="error-text"></div>
+            </form>
+
+            <!-- CREATE ROOM FORM -->
+            <form id="createForm" class="form-section">
+                <div class="input-group">
+                    <i class="fa-solid fa-hashtag input-icon"></i>
+                    <input type="text" id="createRoomId" placeholder="Desired Room ID" required autocomplete="off">
+                </div>
+                <div class="input-group">
+                    <i class="fa-solid fa-lock input-icon"></i>
+                    <input type="password" id="createPassword" placeholder="Set Password" required>
+                </div>
+                <div class="input-group">
+                    <i class="fa-solid fa-users input-icon"></i>
+                    <input type="number" id="createMaxUsers" placeholder="Max Users (e.g. 5)" min="2" max="50" required>
+                </div>
+                <div class="input-group">
+                    <i class="fa-solid fa-user-tie input-icon"></i>
+                    <input type="text" id="createCreator" placeholder="Your Name (Creator)" required maxlength="20" autocomplete="off">
+                </div>
+                <button type="submit" class="btn secondary-btn btn-animate">Create Space <i class="fa-solid fa-plus"></i></button>
+                <div id="createError" class="error-text"></div>
+                <div id="createSuccess" class="success-text"></div>
+            </form>
+        </div>
+    </div>
+
+    <script src="theme.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>

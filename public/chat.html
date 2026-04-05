@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chat Space ❤️ - Room</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
+</head>
+<body>
+    <div class="background-effects">
+        <div class="blob blob-1"></div>
+        <div class="blob blob-2"></div>
+    </div>
+
+    <div class="chat-container">
+        <!-- Sidebar -->
+        <div class="glass-panel sidebar">
+            <div class="room-info">
+                <h2><i class="fa-solid fa-heart-pulse icon-glow"></i> Chat Space</h2>
+                <div class="room-details">
+                    <p><strong>Room ID:</strong> <span id="displayRoomId"></span></p>
+                    <p id="creatorBadge" style="display:none; color: var(--secondary); font-weight: bold; margin-top: 5px;">👑 You are the Creator</p>
+                </div>
+            </div>
+
+            <div class="users-list">
+                <h3>Users <span id="userCount">0</span></h3>
+                <div id="usersContainer"></div>
+            </div>
+
+            <div id="creatorControls" class="creator-controls">
+                <button id="clearChatBtn" class="btn danger-btn"><i class="fa-solid fa-broom"></i> Clear Chat</button>
+                <button id="deleteRoomBtn" class="btn danger-btn"><i class="fa-solid fa-trash"></i> Delete Room</button>
+            </div>
+            
+            <button onclick="leaveRoom()" class="btn" style="background: rgba(255,255,255,0.1); border: 1px solid var(--glass-border); margin-top: auto;"><i class="fa-solid fa-right-from-bracket"></i> Leave Room</button>
+        </div>
+
+        <!-- Chat Area -->
+        <div class="glass-panel chat-area">
+            <div class="chat-header">
+                <div>
+                    <h3 id="chatHeaderTitle">Room Chat</h3>
+                    <small id="typingIndicator" style="color: var(--secondary); opacity: 0; transition: opacity 0.3s;">Someone is typing...</small>
+                </div>
+                <div class="webrtc-controls">
+                    <button id="themeToggle" class="icon-btn" title="Toggle Theme"><i class="fa-solid fa-moon"></i></button>
+                    <button id="startAudioBtn" class="icon-btn" title="Start Audio Call"><i class="fa-solid fa-phone"></i></button>
+                    <button id="startVideoBtn" class="icon-btn" title="Start Video Call"><i class="fa-solid fa-video"></i></button>
+                    <button id="leaveCallBtn" class="icon-btn" title="Leave Call"><i class="fa-solid fa-phone-slash"></i></button>
+                </div>
+            </div>
+
+            <!-- Video Container -->
+            <div id="videoContainer" class="video-container">
+                <!-- Local Video -->
+                <div class="video-box" id="localVideoBox" style="display:none;">
+                    <video id="localVideo" autoplay muted playsinline></video>
+                    <div class="video-label">You</div>
+                </div>
+                <!-- Remote Videos Will Be Added Here -->
+            </div>
+
+            <div class="messages" id="messagesContainer">
+                <div class="system-message">Welcome to the secure end-to-end encrypted chat space.</div>
+            </div>
+
+            <!-- Stickers Panel -->
+            <div class="stickers-panel-container" id="stickersPanel">
+                <div class="panel-tabs">
+                    <button class="panel-tab active" onclick="switchMediaTab('stickers')">😀 Stickers</button>
+                    <button class="panel-tab" onclick="switchMediaTab('giphy')">🎬 GIFs</button>
+                </div>
+                
+                <div id="tab-stickers" class="media-tab-content active">
+                    <div class="stickers-grid" id="localStickersGrid"></div>
+                </div>
+
+                <div id="tab-giphy" class="media-tab-content">
+                    <div style="display:flex; gap: 5px;">
+                        <select id="gifSource" style="background:rgba(0,0,0,0.3); border:1px solid var(--glass-border); color:white; border-radius:8px; padding: 0 5px; outline:none;">
+                            <option value="giphy">GIPHY</option>
+                            <option value="tenor">Tenor</option>
+                        </select>
+                        <input type="text" id="giphySearch" placeholder="Search GIFs..." autocomplete="off">
+                        <button onclick="searchGIF()" style="padding: 0 10px; border-radius:8px; background:var(--secondary); color:#fff; border:none; cursor:pointer;"><i class="fa-solid fa-search"></i></button>
+                    </div>
+                    <div id="giphyLoader" style="display:none; text-align:center; color:var(--secondary); padding: 10px;">Loading...</div>
+                    <div class="stickers-grid" id="giphyGrid" style="margin-top: 10px;"></div>
+                </div>
+            </div>
+
+            <div class="chat-input-area">
+                <button id="stickerBtn" class="icon-btn"><i class="fa-solid fa-face-smile"></i></button>
+                <input type="text" id="messageInput" placeholder="Type an encrypted message..." autocomplete="off">
+                <button id="sendBtn" class="send-btn"><i class="fa-solid fa-paper-plane"></i></button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="theme.js"></script>
+    <script src="chat.js"></script>
+    <script src="webrtc.js"></script>
+</body>
+</html>

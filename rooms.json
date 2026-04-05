@@ -1,0 +1,12 @@
+{
+  "saravanan": {
+    "roomId": "saravanan",
+    "password": "9becbc3cf05537d753048e4e3d798830c95bae025d4b081ae0a5a825032ddce4",
+    "maxUsers": 2,
+    "creator": "saravanan",
+    "users": [],
+    "messages": [],
+    "createdAt": 1775302400115,
+    "lastClearedAt": 1775302400115
+  }
+}
